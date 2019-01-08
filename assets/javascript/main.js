@@ -53,98 +53,105 @@ var submitButton = document.getElementById('submit');
 //Generating the quiz
 function generateQuiz(questions, quizBox, resultsBox, submitButton) {
     // show quiZ
+console.log("generation started")
+   
+        // show results
+        // function showResults(questions, quizBox, resultsBox) {
+        //     var answerBox = quizBox.querySelectorAll('.answers');
 
-    function showQuestions(questions, quizBox) {
-        //console.log(questions)
+        //     // tracking the answers and what not
+
+        //     // keep track of user's answers
+        //     var userChoice = '';
+        //     var numCorrect = 0;
+        //     var numWrong = 0;
+
+        //     // need a for loop for questions and answers: 
+        //     for (var i = 0; i < questions.length; i++) {
+
+        //         userChoice = (answerBox[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+        //         console.log(userchoice)
+        //         // if answer is correct
+        //         if (userChoice === questions[i].correctAnswer) {
+        //             // add to the number of correct answers
+        //             numCorrect++;
+
+        //         }
+        //         // if answer is wrong or blank
+        //         else {
+
+        //             numWrong++;
+        //         }
+        //     }
+
+            //Timer:
+            // function startTimer(duration, display) {
+            //     var timer = duration, minutes, seconds;
+            //     setInterval(function () {
+            //         minutes = parseInt(timer / 60, 10)
+            //         seconds = parseInt(timer % 60, 10);
+
+            //         minutes = minutes < 10 ? "0" + minutes : minutes;
+            //         seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            //         display.textContent = minutes + ":" + seconds;
+
+            //         if (--timer < 0) {
+            //             timer = duration;
+            //             alert(resultsbox.innerHTML = 'Correct Answers' + numCorrect + 'Incorrect Answers' + numWrong);
+            //         }
+            //     }, 1000);
+            // }
+
+            // window.onload = function () {
+            //     var twoMinutes = 60 * 2,
+            //         display = document.querySelector('#timer');
+            //     startTimer(twoMinutes, display);
+            // };
+
+
+
+        
+
+        
+        
+    
+    }
+    // submitButton.onclick = function () {
+    //     showResults(questions, quizBox, resultsBox);
+    // }
+
+    function showQuestions(cuestions, quizziniess) {
+        // console.log(cuestions)
         var output = [];
         var answers;
-
-        for (var i = 0; i < questions.length; i++) {
+        quizziniess = document.getElementById('quiz');
+        console.log(quizziniess)
+        for (var i = 0; i < cuestions.length; i++) {
 
             // reset the list of answers
             answers = [];
 
             //each available answer to a question
-            for (letter in questions[i].answers) {
+            for (letter in cuestions[i].answers) {
 
                 //attempting to use a HTML radio button// 
                 answers.push(
                     '<label>'
                     + '<input type="radio" name="question' + i + '" value="' + letter + '">'
                     + letter + ': '
-                    + questions[i].answers[letter]
+                    + cuestions[i].answers[letter]
                     + '</label>'
                 );
                 output.push(
-                    '<div class="question">' + questions[i].question + '</div>'
+                    '<div class="question">' + cuestions[i].question + '</div>'
                     + '<div class="answers">' + answers.join('') + '</div>'
                 );
             }
             //converting to HTML??? 
-            quizBox.innerHTML = output.join('');
+            console.log("quizbox", output)
+            quizziniess.innerHTML = output.join('');
         }
-        // show results
-        function showResults(questions, quizBox, resultsBox) {
-            var answerBox = quizBox.querySelectorAll('.answers');
+    } 
 
-            // tracking the answers and what not
-
-            // keep track of user's answers
-            var userChoice = '';
-            var numCorrect = 0;
-            var numWrong = 0;
-
-            // need a for loop for questions and answers: 
-            for (var i = 0; i < questions.length; i++) {
-
-                userChoice = (answerBox[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
-                console.log(userchoice)
-                // if answer is correct
-                if (userChoice === questions[i].correctAnswer) {
-                    // add to the number of correct answers
-                    numCorrect++;
-
-                }
-                // if answer is wrong or blank
-                else {
-
-                    numWrong++;
-                }
-            }
-
-            //Timer:
-            function startTimer(duration, display) {
-                var timer = duration, minutes, seconds;
-                setInterval(function () {
-                    minutes = parseInt(timer / 60, 10)
-                    seconds = parseInt(timer % 60, 10);
-
-                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                    display.textContent = minutes + ":" + seconds;
-
-                    if (--timer < 0) {
-                        timer = duration;
-                        alert(resultsbox.innerHTML = 'Correct Answers' + numCorrect + 'Incorrect Answers' + numWrong);
-                    }
-                }, 1000);
-            }
-
-            window.onload = function () {
-                var twoMinutes = 60 * 2,
-                    display = document.querySelector('#timer');
-                startTimer(twoMinutes, display);
-            };
-
-
-
-        }
-
-        showQuestions(questions, quizBox);
-        submitButton.onclick = function () {
-            showResults(questions, quizBox, resultsBox);
-        }
-    }
-
-}
+    showQuestions(questions, quizBox);
