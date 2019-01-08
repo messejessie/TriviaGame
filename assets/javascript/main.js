@@ -1,4 +1,4 @@
-var myQuestions = [
+var questions = [
     {
         question: "What are six signs of depresion you should never ignore?",
         answers: {
@@ -41,3 +41,48 @@ var myQuestions = [
     },
 
 ]
+var quizContainer = document.getElementById('quiz');
+var resultsContainer = document.getElementById('results');
+var submitButton = document.getElementById('submit');
+
+//Generating the quiz
+function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+    // show answers
+    function showQuestions(questions, quizContainer) {
+        var output = [];
+        var answers;
+
+        for (var i = 0; i < questions.length; i++) {
+
+            // reset the list of answers
+            answers = [];
+
+            //each available answer to a question
+            for (letter in questions[i].answers) {
+
+                //attempting to use a HTML radio button// 
+                answers.push(
+                    '<label>'
+                    + '<input type="radio" name="question' + i + '" value="' + letter + '">'
+                    + letter + ': '
+                    + questions[i].answers[letter]
+                    + '</label>'
+                );
+                output.push(
+                    '<div class="question">' + questions[i].question + '</div>'
+                    + '<div class="answers">' + answers.join('') + '</div>'
+                );
+            }
+            //converting to HTML??? 
+            quizContainer.innerHTML = output.join('');
+        }
+        // show results
+        function showResults(questions, quizContainer, resultsContainer) {
+        }
+
+        showQuestions(questions, quizContainer);
+        submitButton.onclick = function () {
+            showResults(questions, quizContainer, resultsContainer);
+        }
+    }
+}
