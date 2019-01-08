@@ -1,3 +1,4 @@
+
 var questions = [
     {
         question: "What are six signs of depresion you should never ignore?",
@@ -42,15 +43,17 @@ var questions = [
 
 ]
 console.log(questions);
+
+generateQuiz(questions, quizBox, resultsBox, submitButton);
 var quizBox = document.getElementById('quiz');
 var resultsBox = document.getElementById('results');
 var submitButton = document.getElementById('submit');
 
-generateQuiz(questions, quizBox, resultsBox, submitButton);
 
 //Generating the quiz
 function generateQuiz(questions, quizBox, resultsBox, submitButton) {
-    // show answers
+    // show quiZ
+
     function showQuestions(questions, quizBox) {
         //console.log(questions)
         var output = [];
@@ -108,7 +111,32 @@ function generateQuiz(questions, quizBox, resultsBox, submitButton) {
                     numWrong++;
                 }
             }
-            resultsbox.innerHTML = 'Correct Answers' + numCorrect + 'Incorrect Answers' + numWrong;
+
+            //Timer:
+            function startTimer(duration, display) {
+                var timer = duration, minutes, seconds;
+                setInterval(function () {
+                    minutes = parseInt(timer / 60, 10)
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    display.textContent = minutes + ":" + seconds;
+
+                    if (--timer < 0) {
+                        timer = duration;
+                        alert(resultsbox.innerHTML = 'Correct Answers' + numCorrect + 'Incorrect Answers' + numWrong);
+                    }
+                }, 1000);
+            }
+
+            window.onload = function () {
+                var twoMinutes = 60 * 2,
+                    display = document.querySelector('#timer');
+                startTimer(twoMinutes, display);
+            };
+
 
 
         }
@@ -118,4 +146,5 @@ function generateQuiz(questions, quizBox, resultsBox, submitButton) {
             showResults(questions, quizBox, resultsBox);
         }
     }
+
 }
