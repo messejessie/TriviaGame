@@ -41,14 +41,18 @@ var questions = [
     },
 
 ]
-var quizContainer = document.getElementById('quiz');
-var resultsContainer = document.getElementById('results');
+console.log(questions);
+var quizBox = document.getElementById('quiz');
+var resultsBox = document.getElementById('results');
 var submitButton = document.getElementById('submit');
 
+generateQuiz(questions, quizBox, resultsBox, submitButton);
+
 //Generating the quiz
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+function generateQuiz(questions, quizBox, resultsBox, submitButton) {
     // show answers
-    function showQuestions(questions, quizContainer) {
+    function showQuestions(questions, quizBox) {
+        //console.log(questions)
         var output = [];
         var answers;
 
@@ -74,15 +78,44 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
                 );
             }
             //converting to HTML??? 
-            quizContainer.innerHTML = output.join('');
+            quizBox.innerHTML = output.join('');
         }
         // show results
-        function showResults(questions, quizContainer, resultsContainer) {
+        function showResults(questions, quizBox, resultsBox) {
+            var answerBox = quizBox.querySelectorAll('.answers');
+
+            // tracking the answers and what not
+
+            // keep track of user's answers
+            var userChoice = '';
+            var numCorrect = 0;
+            var numWrong = 0;
+
+            // need a for loop for questions and answers: 
+            for (var i = 0; i < questions.length; i++) {
+
+                userChoice = (answerBox[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+                console.log(userchoice)
+                // if answer is correct
+                if (userChoice === questions[i].correctAnswer) {
+                    // add to the number of correct answers
+                    numCorrect++;
+
+                }
+                // if answer is wrong or blank
+                else {
+
+                    numWrong++;
+                }
+            }
+            resultsbox.innerHTML = 'Correct Answers' + numCorrect + 'Incorrect Answers' + numWrong;
+
+
         }
 
-        showQuestions(questions, quizContainer);
+        showQuestions(questions, quizBox);
         submitButton.onclick = function () {
-            showResults(questions, quizContainer, resultsContainer);
+            showResults(questions, quizBox, resultsBox);
         }
     }
 }
